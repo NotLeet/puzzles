@@ -43,19 +43,19 @@ def solve(num_queens, rows, columns, queen_positions=None, squares=None, depth=0
 
     if len(queen_positions) < num_queens:
         if len(squares) == 0:
-            return [False, False]
-        result = [False, False]
+            return False
+        result = False
         dead_squares = []
-        while result[0] is False:
+        while result is False:
             safe_squares_minus_dead_squares = [square for square in squares if square not in dead_squares]
             if len(safe_squares_minus_dead_squares) > 0:
                 new_queen = safe_squares_minus_dead_squares[0]
             else:
-                return [False, True]
+                return False
             queen_positions.append(new_queen)
             new_squares = safe_squares(new_queen, squares)
             result = solve(num_queens, rows, columns, queen_positions, new_squares, depth+1)
-            if result[0] is False:
+            if result is False:
                 dead_squares.append(new_queen)
                 queen_positions.pop()
         return result
@@ -65,9 +65,9 @@ def solve(num_queens, rows, columns, queen_positions=None, squares=None, depth=0
 
 def main(n):
     result = solve(n, n, n)
-    if result[0] is False:
+    if result is False:
         print('2x2 and 3x3 boards do not have solutions')
     else:
         print(result)
 
-main(8)
+main(3)
