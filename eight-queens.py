@@ -20,7 +20,7 @@ def safe_squares(queen_pos, all_squares):
     """
     Returns a list of cells that a queen can't
     attack when standing on the input cell.
-    :param start_square:
+    :param queen_pos:
     :param all_squares:
     :return list:
     """
@@ -31,7 +31,7 @@ def safe_squares(queen_pos, all_squares):
             ]
 
 
-def solve(num_queens, rows, columns, queen_positions=None, squares=None, depth=0):
+def solve(num_queens, rows, columns, queen_positions=None, squares=None):
     """
     Recursive function
     Depth first search
@@ -54,7 +54,7 @@ def solve(num_queens, rows, columns, queen_positions=None, squares=None, depth=0
                 return False
             queen_positions.append(new_queen)
             new_squares = safe_squares(new_queen, squares)
-            result = solve(num_queens, rows, columns, queen_positions, new_squares, depth+1)
+            result = solve(num_queens, rows, columns, queen_positions, new_squares)
             if result is False:
                 dead_squares.append(new_queen)
                 queen_positions.pop()
@@ -70,4 +70,4 @@ def main(n):
     else:
         print(result)
 
-main(3)
+main(8)
